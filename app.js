@@ -268,6 +268,7 @@ function createTableFooter(Shop1,Shop2,Shop3,Shop4,Shop5) {
   tableEl.appendChild(trEl);
   for(let i=0; i<hours.length;i++){
     let thEl7 = document.createElement('th');
+    total = 0;
     for(let k=0; k<Shops.length;k++){
       total += Shops[k].soldCookiesPerHour[i];
     }
