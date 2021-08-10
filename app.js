@@ -257,8 +257,9 @@ function createTableHeader() {
 
 }
 
-function createTableFooter() {
-  let TDaily = 0;
+function createTableFooter(Shop1,Shop2,Shop3,Shop4,Shop5) {
+  let Shops = [Shop1,Shop2,Shop3,Shop4,Shop5];
+  let Thours = Shop1.total + Shop2.total + Shop3.total + Shop4.total + Shop5.total;
   let total = 0;
   let trEl = document.createElement('tr');
   let thEl9 = document.createElement('th');
@@ -266,20 +267,16 @@ function createTableFooter() {
   thEl9.textContent = 'total';
   tableEl.appendChild(trEl);
   for(let i=0; i<hours.length;i++){
-    TDaily = 0;
-    for(let k=0; k<Shop.length;k++){
-      total += Shop[k].soldCookiesPerHour[i];
-      TDaily += Shop[k].soldCookiesPerHour[i];
-
+    let thEl7 = document.createElement('th');
+    for(let k=0; k<Shops.length;k++){
+      total += Shops[k].soldCookiesPerHour[i];
     }
-    let trEl7 = document.createElement('th');
-    trEl.appendChild(trEl7);
-    trEl7.textContent = TDaily;
+    thEl7.textContent = total;
+    trEl.appendChild(thEl7);
   }
-  let thEl10 = document.createElement('th');
-  trEl.appendChild(thEl10);
-  thEl10.textContent = total;
-
+  let thEl20 = document.createElement('th');
+  thEl20.textContent = Thours;
+  trEl.appendChild(thEl20);
 }
 
 createTableHeader();
@@ -304,8 +301,7 @@ let Lima = new Shop('Lima', 2, 16, 4.6);
 Lima.generateCustomersPerHour(2, 16);
 Lima.render();
 
-createTableFooter();
-// console.log(Shop);
+createTableFooter(Seattle, Tokyo , Dubai, Paris, Lima);
 
 
 function getRandom(MinOfCustomers, MaxOfCustomers){
