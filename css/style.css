@@ -65,9 +65,29 @@
    color:white;
    padding: 30px;
   }
+
+  img{
+    padding-top: 30px;
+  }
+
+a[href^="mailto"]::before {
+  content: "📧 ";
+}
+
+a[href^="tel"]::before {
+  content: "📞 ";
+}
+
+.box {
+  float: left;
+  padding: 28px;
+  border-style: solid;
+  margin-left: 10px;
   
-#container{
-   color: white;
-   background-color: rgb(95, 94, 94);
-   padding: 30px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
