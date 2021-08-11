@@ -198,6 +198,7 @@ let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 
 let container = document.getElementById('container');
 let tableEl = document.createElement('table');
+tableEl.id = 'table';
 container.appendChild(tableEl);
 function Shop(name, MinOfCustomers, MaxOfCustomers, avgOfCookies) {
   this.name = name;
@@ -257,11 +258,16 @@ function createTableHeader() {
 
 }
 
-function createTableFooter(Shop1,Shop2,Shop3,Shop4,Shop5) {
-  let Shops = [Shop1,Shop2,Shop3,Shop4,Shop5];
-  let Thours = Shop1.total + Shop2.total + Shop3.total + Shop4.total + Shop5.total;
+
+function createTableFooter() {
+  let stores = arr;
+  let Thours = 0;
+  for(let l=0;l<stores.length;l++){
+    Thours += stores[l].total;
+  }
   let total = 0;
   let trEl = document.createElement('tr');
+  trEl.id = 'Footer';
   let thEl9 = document.createElement('th');
   trEl.appendChild(thEl9);
   thEl9.textContent = 'total';
@@ -269,8 +275,8 @@ function createTableFooter(Shop1,Shop2,Shop3,Shop4,Shop5) {
   for(let i=0; i<hours.length;i++){
     let thEl7 = document.createElement('th');
     total = 0;
-    for(let k=0; k<Shops.length;k++){
-      total += Shops[k].soldCookiesPerHour[i];
+    for(let k=0; k<stores.length;k++){
+      total += stores[k].soldCookiesPerHour[i];
     }
     thEl7.textContent = total;
     trEl.appendChild(thEl7);
@@ -280,29 +286,58 @@ function createTableFooter(Shop1,Shop2,Shop3,Shop4,Shop5) {
   trEl.appendChild(thEl20);
 }
 
+
+let arr = [];
+let myform = document.getElementById('myForm');
+myform.addEventListener('submit', addShop);
+function addShop(event) {
+  event.preventDefault();
+  let ShopName = event.target.ShopName.value;
+  let MinOfCustomers = event.target.MinOfCustomers.value;
+  let MaxOfCustomers = event.target.MaxOfCustomers.value;
+  let avgOfCookies = event.target.avgOfCookies.value;
+  let newShop = new Shop(ShopName, MinOfCustomers, MaxOfCustomers, avgOfCookies);
+  newShop.generateCustomersPerHour();
+  arr.push(newShop);
+  document.getElementById('table').innerHTML = '';
+  createTableHeader();
+  for(let q=0;q<arr.length;q++){
+    arr[q].render();
+  }
+  createTableFooter();
+
+}
+
+
+
 createTableHeader();
 
 let Seattle = new Shop('Seattle', 23, 65, 4.6);
 Seattle.generateCustomersPerHour(23, 65);
 Seattle.render();
+arr.push(Seattle);
 
 let Tokyo = new Shop('Tokyo', 3, 24, 1.2);
 Tokyo.generateCustomersPerHour(3, 24);
 Tokyo.render();
+arr.push(Tokyo);
 
 let Dubai	 = new Shop('Dubai', 11, 38, 3.7);
 Dubai	.generateCustomersPerHour(11, 38);
 Dubai	.render();
+arr.push(Dubai);
 
 let Paris = new Shop('Paris', 20, 38, 2.3);
 Paris.generateCustomersPerHour(20, 38);
 Paris.render();
+arr.push(Paris);
 
 let Lima = new Shop('Lima', 2, 16, 4.6);
 Lima.generateCustomersPerHour(2, 16);
 Lima.render();
+arr.push(Lima);
 
-createTableFooter(Seattle, Tokyo , Dubai, Paris, Lima);
+createTableFooter();
 
 
 function getRandom(MinOfCustomers, MaxOfCustomers){

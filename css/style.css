@@ -91,3 +91,14 @@ a[href^="tel"]::before {
   clear: both;
   display: table;
 }
+
+#myForm{
+   margin-left: 10px;
+   margin-right: 35.5vw;
+   font-size: 2vw;
+}
+
+#container{
+  padding-left: 10px;
+  padding-top: 20px;
+}
