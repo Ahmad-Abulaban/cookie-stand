@@ -5,8 +5,8 @@
     padding: 0;
   }
   body{
+    background-color: lightgrey;
 
-    background-color: gray;
   }
   table,
   th,
@@ -14,7 +14,6 @@
     border: 2px solid red;
   }
 
- /* home page style */
  #headF ul {
     list-style-type: none;
     margin: 0;
@@ -28,6 +27,7 @@
   
 #headF li {
     float: left;
+    
   }
   
 #headF li a {
@@ -47,11 +47,13 @@
 
     padding: 20px;
     font-size: 25px;
+    color: brown;
   }
 
   #First{
     padding-left: 50px;
-    font-size: 20px;     
+    font-size: 20px; 
+        
 
   }
   
